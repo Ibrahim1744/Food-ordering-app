@@ -1,0 +1,53 @@
+.container{
+  padding: 20px 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+scroll-behavior: smooth;
+
+}
+.desc{
+  font-size: 24px;
+  color: #444;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 25px;
+}
+.wrapper{
+  display: grid;
+grid-template-columns: repeat(2,1fr);
+  justify-content: center;
+  place-items: center;
+  align-items: center;
+  width: 100%;
+  gap: 25px;
+}
+
+.noProducts{
+  display: block;
+  text-align: center;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
+  padding: 120px;
+}
+@media screen and (max-width: 880px) {
+  .wrapper{
+    grid-template-columns: repeat(1,1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    text-align: center;
+  }
+
+  .desc {
+    width: 90%;
+    text-align: center;
+  }
+}
