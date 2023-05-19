@@ -13,7 +13,7 @@ const Index = ({ orders, products }) => {
     console.log(id);
     try {
       const res = await axios.delete(
-        "https://Food-ordering-app-BETA/api/products/" + id
+        "https://food-ordering-app-beta/api/products/" + id
       );
       setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
     } catch (err) {
@@ -26,7 +26,7 @@ const Index = ({ orders, products }) => {
     const currentStatus = item.status;
 
     try {
-      const res = await axios.put("https://Food-ordering-app-BETA/api/orders/" + id, {
+      const res = await axios.put("https://food-ordering-app-beta/api/orders/" + id, {
         status: currentStatus + 1,
       });
       setOrderList([
@@ -133,8 +133,8 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  const productRes = await axios.get("https://Food-ordering-app-BETA/api/products");
-  const orderRes = await axios.get("https://Food-ordering-app-BETA/api/orders");
+  const productRes = await axios.get("https://food-ordering-app-beta/api/products");
+  const orderRes = await axios.get("https://food-ordering-app-beta/api/orders");
 
   return {
     props: {
