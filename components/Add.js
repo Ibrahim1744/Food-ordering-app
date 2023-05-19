@@ -49,7 +49,7 @@ const [done,setDone]=useState(false)
         console.log(newProduct);
         setWait(false)
         setDone(true)
-      await axios.post("http://localhost:3000/api/products", newProduct);
+      await axios.post("https://https://food-ordering-app-betaa.vercel.app//api/products", newProduct);
       setClose(true);
     } catch (err) {
       console.log(err);
