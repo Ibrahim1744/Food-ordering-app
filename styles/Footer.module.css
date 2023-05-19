@@ -45,6 +45,7 @@
 
   .item {
     flex-direction: column;
+    gap: 55px;
   }
 
   .title {

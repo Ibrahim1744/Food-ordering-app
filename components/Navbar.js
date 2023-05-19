@@ -16,6 +16,10 @@ const Navbar = () => {
         <div className={styles.texts}>
           <div className={styles.text}>ORDER NOW!</div>
           <div className={styles.text}>022 88 5124 11</div>
+          <Link href='/admin'>
+          <div className={styles.text}>Admin</div>
+
+          </Link>
 
         </div>
       </div>
