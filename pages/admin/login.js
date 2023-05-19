@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleClick = async () => {
     try {
-      await axios.post("https://Food-ordering-app/api/login", {
+      await axios.post("https://Food-ordering-app-BETA/api/login", {
         username,
         password,
       });
