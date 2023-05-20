@@ -2,6 +2,8 @@ import styles from "../../styles/Order.module.css";
 import Image from "next/image";
 import axios from "axios";
 import Layout from "@/components/Layout";
+import dbConnect from "../../utils/mongo";
+import OrderS from "../../models/OrderS";
 
 const Order = ({ order }) => {
   const status = order.status;
@@ -119,10 +121,42 @@ const Order = ({ order }) => {
 };
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`https://food-ordering-app-betaa.vercel.app/api/orders/${params.id}`);
-  return {
-    props: { order: res.data },
-  };
+
+
+
+
+
+
+  dbConnect();
+      const order = await OrderS.findById(params.id);
+
+    return {
+         props: {
+        
+          order: {
+            _id:JSON.parse(JSON.stringify(order._id)),
+            customer:order.customer,
+            address:order.address,
+            total:order.total,
+            status:order.status,
+          },
+         }
+       };
+
+
+
+
+
+
+
+
+
+
+
+  // const res = await axios.get(`https://food-ordering-app-betaa.vercel.app/api/orders/${params.id}`);
+  // return {
+  //   props: { order: res.data },
+  // };
 };
 
 export default Order;

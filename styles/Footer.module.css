@@ -28,6 +28,8 @@
 
 .text {
   color: lightgray;
+  margin-bottom: 10px;
+
 }
 
 .motto {
@@ -54,5 +56,6 @@
 
   .text {
     font-size: 20px;
+    margin-bottom: 20px;
   }
 }

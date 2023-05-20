@@ -5,6 +5,9 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
 import Layout from "@/components/Layout";
+import dbConnect from "../../utils/mongo";
+import ProductS from "../../models/ProductS";
+
 
 const Product = ({ pizza }) => {
   const [price, setPrice] = useState(pizza.prices[0]);
@@ -101,15 +104,30 @@ const Product = ({ pizza }) => {
 };
 
 export const getServerSideProps = async ({ params }) => {
+  dbConnect();
 
-  const res = await axios.get(
-    `https://food-ordering-app-betaa.vercel.app/api/products/${params.id}`
-  );
+  
+    const product = await ProductS.findById(params.id);
+  
+
+console.log(product);
+
   return {
     props: {
-      pizza: res.data,
+      pizza: {
+        title:product.title,
+        prices:product.prices[0,1,2],
+        extraOptions:JSON.parse(JSON.stringify(product.extraOptions)),
+        prices:product.prices,
+        desc:product.desc,
+        img:product.img,
+      },
     },
   };
+
+  // const res = await axios.get(
+  //   `https://food-ordering-app-betaa.vercel.app/api/products/${params.id}`
+  // );
 };
 
 export default Product;

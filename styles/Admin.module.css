@@ -1,5 +1,5 @@
 .container {
-  padding: 50px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -18,7 +18,7 @@
 .button {
   border: none;
   color: white;
-  padding: 5px;
+  padding: 7px;
   cursor: pointer;
 }
 
@@ -35,4 +35,20 @@
 }
 .tdCenterImg{
   text-align: left;
+}
+
+@media screen and (max-width:800px) {
+  .button {
+    border: none;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    margin-top: 25px;
+  }
+}
+
+@media screen and (max-width:500px) {
+  .thId {
+  display: none;
+  }
 }

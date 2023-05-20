@@ -1,5 +1,5 @@
 import dbConnect from "../../../utils/mongo";
-import Order from "../../../models/Order";
+import OrderS from "../../../models/OrderS";
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -8,7 +8,7 @@ const handler = async (req, res) => {
 
   if (method === "GET") {
     try {
-      const orders = await Order.find();
+      const orders = await OrderS.find();
       res.status(200).json(orders);
     } catch (err) {
       res.status(500).json("ششششششش");
@@ -16,7 +16,7 @@ const handler = async (req, res) => {
   }
   if (method === "POST") {
     try {
-      const order = await Order.create(req.body);
+      const order = await OrderS.create(req.body);
       res.status(201).json(order);
     } catch (err) {
       res.status(500).json("ششششششش");

@@ -1,5 +1,5 @@
 import dbConnect from "../../../utils/mongo";
-import Product from "../../../models/Product";
+import ProductS from "../../../models/ProductS";
 
 export default async function handler(req, res) {
   const { method, cookies } = req;
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   if (method === "GET") {
     try {
-      const products = await Product.find();
+      const products = await ProductS.find();
       res.status(200).json(products);
     } catch (err) {
       res.status(500).json(err);
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       return res.status(401).json("Not authenticated!")
     }
     try {
-      const product = await Product.create(req.body);
+      const product = await ProductS.create(req.body);
       res.status(201).json(product);
     } catch (err) {
       res.status(500).json("ششششششش");

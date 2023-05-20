@@ -7,7 +7,8 @@ import { useState } from 'react'
 import AddButton from "../components/AddButton";
 import Add from "../components/Add";
 import Layout from '@/components/Layout'
-
+import dbConnect from "../utils/mongo";
+import ProductS from "../models/ProductS";
 
 export default function Home({pizzaList , admin}) {
   const [close, setClose] = useState(true);
@@ -32,12 +33,27 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
 
-   const res = await axios.get("https://food-ordering-app-betaa.vercel.app/api/products");
-  return {
-    props: {
-      pizzaList: res.data,
-      admin
-    }
-  };
+  const {method}=ctx.req
+
+
+  dbConnect();
+      const products = await ProductS.find();
+    return {
+         props: {
+           pizzaList: products.map((product)=>({
+            title:product.title,
+            _id:JSON.parse(JSON.stringify(product._id)),
+            img:product.img,
+            desc:product.desc,
+            prices:product.prices,
+            extraOptions:JSON.parse(JSON.stringify(product.extraOptions)),
+           })),
+           admin
+         }
+       };
+
+
+  //  const res = await axios.get("https://food-ordering-app-betaa.vercel.app/api/products");
+  //
 };
 
