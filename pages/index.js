@@ -14,7 +14,7 @@ export default function Home({pizzaList , admin}) {
   const [close, setClose] = useState(true);
 
   return (
-    <Layout title="Pizza Restaurant in NYC">
+    <Layout title="Food Restaurant in NYC">
     
     <Featured/>
     {admin && <AddButton setClose={setClose} />}

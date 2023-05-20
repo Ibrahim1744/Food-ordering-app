@@ -7,10 +7,10 @@ const PizzaList = ({ pizzaList }) => {
     <>
       {pizzaList.length !==0 ? (
         <div id="products" className={styles.container}>
-          <h1 className={styles.title}>THE BEST PIZZA IN TOWN</h1>
+          <h1 className={styles.title}>THE BEST RESTAURANT IN TOWN</h1>
           <p className={styles.desc}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim ut
-            nemo assumenda, odio perspiciatis sed?
+          Nothing brings people together like good food.
+
           </p>
           <div className={styles.wrapper}>
             {pizzaList ? (
