@@ -5,9 +5,9 @@ const nextConfig = {
       "res.cloudinary.com"
     ]
   },
-  experimental: {
-    forceSwcTransforms: true,
-  },
+  // experimental: {
+  //   forceSwcTransforms: true,
+  // },
 }
 
 module.exports = nextConfig

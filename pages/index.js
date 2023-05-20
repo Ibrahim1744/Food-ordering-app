@@ -25,6 +25,7 @@ export default function Home({pizzaList , admin}) {
 }
 
 export const getServerSideProps = async (ctx) => {
+  const result=await dbConnect();
 
   const myCookie = ctx.req?.cookies || "";
   let admin = false;
@@ -35,15 +36,13 @@ export const getServerSideProps = async (ctx) => {
 
   const {method}=ctx.req
 
-
-  dbConnect();
       const products = await ProductS.find();
     return {
          props: {
            pizzaList: products.map((product)=>({
             title:product.title,
             _id:JSON.parse(JSON.stringify(product._id)),
-            img:product.img,
+            img:product.img,  
             desc:product.desc,
             prices:product.prices,
             extraOptions:JSON.parse(JSON.stringify(product.extraOptions)),
