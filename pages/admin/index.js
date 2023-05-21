@@ -6,12 +6,22 @@ import Layout from "@/components/Layout";
 import dbConnect from "../../utils/mongo";
 import ProductS from "../../models/ProductS";
 import OrderS from "../../models/OrderS";
+import Edit from "@/components/Edit";
+
+
 
 
 const Index = ({ orders, products }) => {
   const [pizzaList, setPizzaList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
   const status = ["preparing", "on the way", "delivered"];
+  const [open, setOpen] = useState(false);
+  const [product,setProduct]=useState(null)
+  const handleEdit=async(product)=>{
+    setOpen(true)
+    setProduct(product)
+    
+  }
 
   const handleDelete = async (id) => {
     console.log(id);
@@ -44,7 +54,10 @@ const Index = ({ orders, products }) => {
 
   return (
     <Layout title="Admin Dashboard">
+    { open &&
+                  <Edit product={product}  setOpen={setOpen} />
 
+                  }
     <div className={styles.container}>
       <div className={styles.item}>
         <h1 className={styles.title}>Products</h1>
@@ -75,7 +88,9 @@ const Index = ({ orders, products }) => {
                 <td className={styles.tdCenter}>{product.title}</td>
                 <td className={styles.tdCenter}>${product.prices[0]}</td>
                 <td className={styles.tdCenter}>
-                  <button className={styles.button}>Edit</button>
+                  <button className={styles.button} onClick={()=>handleEdit(product)}  >Edit</button>
+              
+
                   <button
                     className={styles.button}
                     onClick={() => handleDelete(product._id)}

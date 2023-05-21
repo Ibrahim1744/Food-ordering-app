@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       return res.status(401).json("Not authenticated!")
     }
     try {
-      const product = await Product.findByIdAndUpdate(id, req.body, {
+      const product = await ProductS.findByIdAndUpdate(id, req.body, {
         new: true,
       });
       res.status(200).json(product);
