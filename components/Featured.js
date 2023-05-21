@@ -3,7 +3,7 @@ import styles from '../styles/Feature.module.css'
 import Image from 'next/image';
 const Featured = () => {
   const images=[
-    "/images/featured.png ",
+    "/images/featured.png",
     "/images/featured2.png",
     "/images/featured3.png",
 
