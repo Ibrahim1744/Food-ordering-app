@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../styles/Edit.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 
 const Edit = ({ setOpen , product }) => {
+
+
   const [file, setFile] = useState(null);
-  const [title, setTitle] = useState(null);
-  const [desc, setDesc] = useState(null);
-  const [prices, setPrices] = useState([]);
+  const [title, setTitle] = useState(product.title);
+  const [desc, setDesc] = useState(product.desc);
+  const [prices, setPrices] = useState(product.prices);
+  console.log(prices);
   const [extraOptions, setExtraOptions] = useState([]);
   const [extra, setExtra] = useState(null);
 const [wait,setWait]=useState(false)
@@ -47,11 +50,13 @@ const [done,setDone]=useState(false)
         extraOptions,
         img: url,
       };
-        console.log(newProduct);
-        setWait(false)
-        setDone(true)
       await axios.put(`/api/products/${product._id}`, newProduct);
       setOpen(false);
+        console.log(newProduct);
+      
+        setWait(false)
+        setDone(true)
+    
     } catch (err) {
       console.log(err);
     }
@@ -64,9 +69,10 @@ const [done,setDone]=useState(false)
           X
         </span>
         <h1>Edit a new Product</h1>
+        <h4 style={{color:"red"}}>You Should Fill all inputs.</h4>
         <div className={styles.item}>
           <label className={styles.label}>Choose an image</label>
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+          <input  type="file" onChange={(e) => setFile(e.target.files[0])} />
         </div>
         <div className={styles.item}>
           <label className={styles.label}>Title</label>
@@ -74,6 +80,7 @@ const [done,setDone]=useState(false)
             className={styles.input}
             type="text"
             placeholder={product.title}
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
@@ -92,13 +99,15 @@ const [done,setDone]=useState(false)
             <input
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
-              placeholder={product.prices[0]}
               onChange={(e) => changePrice(e, 0)}
+              placeholder={product.prices[0]}
+
             />
             <input
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
               placeholder={product.prices[1]}
+              
 
               onChange={(e) => changePrice(e, 1)}
             />
@@ -106,7 +115,6 @@ const [done,setDone]=useState(false)
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
               placeholder={product.prices[2]}
-
               onChange={(e) => changePrice(e, 2)}
             />
           </div>
@@ -121,7 +129,7 @@ const [done,setDone]=useState(false)
               placeholder={product.extraOptions[0].text}
               onChange={handleExtraInput}
             />
-            <input
+            <input required
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
               placeholder={product.extraOptions[0].price}
@@ -140,7 +148,7 @@ const [done,setDone]=useState(false)
             ))}
           </div>
         </div>
-        <button className={styles.addButton} onClick={handleUpdate}>
+        <button type="submit" className={styles.addButton} onClick={handleUpdate}>
           Update
         </button>
         {

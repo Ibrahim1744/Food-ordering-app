@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const Add = ({ setClose }) => {
+
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
@@ -63,6 +64,8 @@ const [done,setDone]=useState(false)
           X
         </span>
         <h1>Add a new Product</h1>
+        <h4 style={{color:"red"}}>You Should Fill all inputs.</h4>
+
         <div className={styles.item}>
           <label className={styles.label}>Choose an image</label>
           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
