@@ -63,7 +63,7 @@ const [done,setDone]=useState(false)
         <span onClick={() => setClose(true)} className={styles.close}>
           X
         </span>
-        <h1>Add a new Product</h1>
+        <h1 className={styles.title}>Add a new Product</h1>
         <h4 style={{color:"red"}}>You Should Fill all inputs.</h4>
 
         <div className={styles.item}>

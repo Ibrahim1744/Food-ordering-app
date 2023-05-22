@@ -30,7 +30,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
 }
 
 .wrapper {
@@ -117,4 +116,21 @@
   cursor: pointer;
   padding: 5px 0;
   align-self: flex-end;
+}
+
+@media screen and (max-width:590px) {
+
+  .wrapper{
+    width: 380px;
+  }
+  .title{
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width:390px) {
+
+  .wrapper{
+    width: 330px;
+  }
 }
