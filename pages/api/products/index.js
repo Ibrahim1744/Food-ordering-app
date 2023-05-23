@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       const product = await ProductS.create(req.body);
       res.status(201).json(product);
     } catch (err) {
-      res.status(500).json("ششششششش");
+      res.status(500).json(err);
     }
   }
 }
