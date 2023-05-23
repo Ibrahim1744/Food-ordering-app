@@ -2,19 +2,36 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../styles/Edit.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Edit = ({ setOpen , product }) => {
 
+  const titleRef=useRef()
+  const descRef=useRef()
+  const smPricesRef=useRef()
+  const mdPricesRef=useRef()
+  const lgPricesRef=useRef()
+  const extraOptionText=useRef()
+  const extraOptionPrice=useRef()
+  useEffect(() => {
+      titleRef.current.value=product.title
+      descRef.current.value=product.desc
+      smPricesRef.current.value=product.prices[0]
+      mdPricesRef.current.value=product.prices[1]
+      lgPricesRef.current.value=product.prices[2]
+      extraOptionText.current.value=product.extraOptions[0].text
+      extraOptionPrice.current.value=product.extraOptions[0].price
+  }, []);
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(product.img);
   const [title, setTitle] = useState(product.title);
   const [desc, setDesc] = useState(product.desc);
   const [prices, setPrices] = useState(product.prices);
-  console.log(prices);
-  const [extraOptions, setExtraOptions] = useState([]);
-  const [extra, setExtra] = useState(null);
+  const [extraOptions, setExtraOptions] = useState(product.extraOptions);
+  const [extra, setExtra] = useState(product.extraOptions[0]);
 const [wait,setWait]=useState(false)
 const [done,setDone]=useState(false)
+console.log(extra);
 
   const changePrice = (e, index) => {
     const currentPrices = prices;
@@ -23,15 +40,31 @@ const [done,setDone]=useState(false)
   };
 
   const handleExtraInput = (e) => {
-    setExtra({ ...extra, [e.target.name]: e.target.value });
+    if(e.target.name==='price'){
+      const priceValue=e.target.value
+      
+
+      // setExtra({...extra,   }); مكنش ليه لزمه
+      setExtraOptions(extra , extra.price=parseInt(priceValue));
+    }
+    else{
+      const textValue=e.target.value
+
+      // setExtra({...extra, text:e.target.value  });  مكنش ليه لزمه برضو
+      setExtraOptions(extra , extra.text=textValue);
+
+    }
+  
+    
   };
 
-  const handleExtra = (e) => {
-    setExtraOptions((prev) => [...prev, extra]);
-    console.log(extraOptions);
-  };
+  // const handleExtra = (e) => {
+  //  
+  // };
 
   const handleUpdate = async () => {
+    setExtraOptions(extra);
+    console.log(extraOptions ,'a');
     setWait(true)
     const data = new FormData();
     data.append("file", file);
@@ -69,18 +102,20 @@ const [done,setDone]=useState(false)
           X
         </span>
         <h1 className={styles.title}>Edit a new Product</h1>
-        <h4 style={{color:"red"}}>You Should Fill all inputs.</h4>
+        {/* <h4 style={{color:"red"}}>You Should Fill all inputs.</h4> */}
         <div className={styles.item}>
           <label className={styles.label}>Choose an image</label>
           <input  type="file" onChange={(e) => setFile(e.target.files[0])} />
+          <Image src={product.img} width={35} height={35} alt={product.title}/>
         </div>
         <div className={styles.item}>
           <label className={styles.label}>Title</label>
           <input
+
             className={styles.input}
             type="text"
             placeholder={product.title}
-            value={title}
+          ref={titleRef}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
@@ -89,6 +124,7 @@ const [done,setDone]=useState(false)
           <textarea
             rows={4}
             type="text"
+            ref={descRef}
             placeholder={product.desc}
             onChange={(e) => setDesc(e.target.value)}
           />
@@ -99,22 +135,24 @@ const [done,setDone]=useState(false)
             <input
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
+              ref={smPricesRef}
               onChange={(e) => changePrice(e, 0)}
               placeholder={product.prices[0]}
-
             />
             <input
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
               placeholder={product.prices[1]}
               
-
+                ref={mdPricesRef}
               onChange={(e) => changePrice(e, 1)}
             />
             <input
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
               placeholder={product.prices[2]}
+              ref={lgPricesRef}
+
               onChange={(e) => changePrice(e, 2)}
             />
           </div>
@@ -126,27 +164,21 @@ const [done,setDone]=useState(false)
               className={`${styles.input} ${styles.inputSm}`}
               type="text"
               name="text"
-              placeholder={product.extraOptions[0].text}
+              ref={extraOptionText}
               onChange={handleExtraInput}
             />
-            <input required
+            <input 
               className={`${styles.input} ${styles.inputSm}`}
               type="number"
-              placeholder={product.extraOptions[0].price}
+              ref={extraOptionPrice}
               name="price"
-              onChange={handleExtraInput}
+              onChange={(e)=>handleExtraInput(e)}
             />
-            <button className={styles.extraButton} onClick={handleExtra}>
+          {/* <button className={styles.extraButton} onClick={handleExtra}>
               Add
-            </button>
+            </button> */}
           </div>
-          <div className={styles.extraItems}>
-            {extraOptions.map((option) => (
-              <span key={option.text} className={styles.extraItem}>
-                {option.text}
-              </span>
-            ))}
-          </div>
+        
         </div>
         <button type="submit" className={styles.addButton} onClick={handleUpdate}>
           Update
