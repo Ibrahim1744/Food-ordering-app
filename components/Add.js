@@ -50,7 +50,7 @@ const [done,setDone]=useState(false)
         console.log(newProduct);
         setWait(false)
         setDone(true)
-        await axios.post("/api/products", newProduct);
+        await axios.post("food-ordering-app-betaaa.vercel.app/api/products", newProduct);
       setClose(true);
     } catch (err) {
       console.log(err);
