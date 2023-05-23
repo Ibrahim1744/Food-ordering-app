@@ -1,13 +1,5 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   images:{
-    domains:[
-      "res.cloudinary.com"
-    ]
-  },
-  // experimental: {
-  //   forceSwcTransforms: true,
-  // },
+    domains:["res.cloudinary.com"]
+  }
 }
-
-module.exports = nextConfig
