@@ -44,7 +44,7 @@ console.log(extra);
       const priceValue=e.target.value
       
 
-      // setExtra({...extra,   }); مكنش ليه لزمه
+      // setExtra({...extra,   });  مكنش ليه لزمه لان الاكسترا كدا كدا فيها الاوبجكت
       setExtraOptions(extra , extra.price=parseInt(priceValue));
     }
     else{
