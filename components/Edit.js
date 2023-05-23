@@ -65,7 +65,6 @@ console.log(extra);
   const handleUpdate = async () => {
     setExtraOptions(extra);
     console.log(extraOptions ,'a');
-    setWait(true)
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "uploadsss");
@@ -74,6 +73,8 @@ console.log(extra);
         "https://api.cloudinary.com/v1_1/dial2z54w/image/upload",
         data
       );
+      setWait(true)
+
           console.log(uploadRes.data);
       const { url } = uploadRes.data;
       const newProduct = {
