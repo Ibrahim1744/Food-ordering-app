@@ -85,7 +85,6 @@ console.log(extra);
       };
       await axios.put(`/api/products/${product._id}`, newProduct);
       setOpen(false);
-        console.log(newProduct);
       
         setWait(false)
         setDone(true)
